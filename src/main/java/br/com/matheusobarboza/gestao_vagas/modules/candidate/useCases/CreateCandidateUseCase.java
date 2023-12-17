@@ -17,12 +17,12 @@ public class CreateCandidateUseCase {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
-  public CandidateEntity execute (CandidateEntity candidateEntity) {
+  public CandidateEntity execute(CandidateEntity candidateEntity) {
     this.candidateRepository
-      .findByUsernameOrEmail(candidateEntity.getUsername(), candidateEntity.getEmail())
-      .ifPresent((user) -> {
-        throw new UserFoundException();
-      });
+        .findByUsernameOrEmail(candidateEntity.getUsername(), candidateEntity.getEmail())
+        .ifPresent((user) -> {
+          throw new UserFoundException();
+        });
 
     var password = passwordEncoder.encode(candidateEntity.getPassword());
     candidateEntity.setPassword(password);

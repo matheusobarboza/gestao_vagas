@@ -10,7 +10,7 @@ import br.com.matheusobarboza.gestao_vagas.modules.company.repositories.CompanyR
 
 @Service
 public class CreateCompanyUseCase {
-  
+
   @Autowired
   private CompanyRepository companyRepository;
 
@@ -19,10 +19,10 @@ public class CreateCompanyUseCase {
 
   public CompanyEntity execute(CompanyEntity companyEntity) {
     this.companyRepository
-      .findByUsernameOrEmail(companyEntity.getUsername(), companyEntity.getEmail())
-      .ifPresent((user) -> {
-        throw new UserFoundException();
-      });
+        .findByUsernameOrEmail(companyEntity.getUsername(), companyEntity.getEmail())
+        .ifPresent((user) -> {
+          throw new UserFoundException();
+        });
     var password = passwordEncoder.encode(companyEntity.getPassword());
     companyEntity.setPassword(password);
 
